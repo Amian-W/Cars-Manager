@@ -46,11 +46,11 @@
                                 {{ __('Model') }}
                             </th>
                             <td class="px-6 py-3">
-                                Id : {{ $car->car_model_id }}
+                                <strong>Model</strong> : {{ $car->carModel->name }}
                                 <br>
-                                Model : {{ $car->carModel->name }}
+                                <strong>Brand</strong> : {{ $car->carModel->brand->name }}
                                 <br>
-                                Launch Date : {{ $car->carModel->launch_date }}
+                                <strong>Launch Date</strong> : {{ $car->carModel->launch_date }}
                             </td>
                         </tr>
                         <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
