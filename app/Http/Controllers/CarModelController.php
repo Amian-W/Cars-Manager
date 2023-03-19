@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CarModel;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CarModelController extends Controller
 {
@@ -12,7 +13,8 @@ class CarModelController extends Controller
      */
     public function index()
     {
-        //
+        $carModels = CarModel::all();
+        return view('carModels.index', compact('carModels'));
     }
 
     /**
@@ -20,7 +22,7 @@ class CarModelController extends Controller
      */
     public function create()
     {
-        //
+        return view('carModels.create');
     }
 
     /**
@@ -28,7 +30,13 @@ class CarModelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'lunch_date' => 'required',
+            'brand_id'  => 'required',
+        ]);
+        CarModel::create($request->all());
+        return redirect()->route('carModels.index');
     }
 
     /**
@@ -36,15 +44,18 @@ class CarModelController extends Controller
      */
     public function show(CarModel $carModel)
     {
-        //
+        return view('carModels.create', compact($carModel));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CarModel $carModel)
+    public function edit(string $id)
     {
-        //
+        return response()->view(
+            'carModels.edit',
+            ['carModel' => CarModel::findOrFail($id)]
+        );
     }
 
     /**
@@ -52,7 +63,14 @@ class CarModelController extends Controller
      */
     public function update(Request $request, CarModel $carModel)
     {
-        //
+         $request->validate([
+            'name' => 'required',
+            'lunch_date' => 'required',
+            'brand_id'  => 'required',
+        ]);
+
+        $carModel->update($request->all());
+        return redirect()->route('carModels.index');
     }
 
     /**
@@ -60,6 +78,7 @@ class CarModelController extends Controller
      */
     public function destroy(CarModel $carModel)
     {
-        //
+        $carModel->delete();
+        return redirect()->route('carModels.index');
     }
 }
