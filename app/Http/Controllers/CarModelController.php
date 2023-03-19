@@ -32,7 +32,7 @@ class CarModelController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'lunch_date' => 'required',
+            'launch_date' => 'required',
             'brand_id'  => 'required',
         ]);
         CarModel::create($request->all());
@@ -44,13 +44,13 @@ class CarModelController extends Controller
      */
     public function show(CarModel $carModel)
     {
-        return view('carModels.create', compact($carModel));
+        return view('carModels.show', compact('carModel'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id) : Response
     {
         return response()->view(
             'carModels.edit',
@@ -65,7 +65,7 @@ class CarModelController extends Controller
     {
          $request->validate([
             'name' => 'required',
-            'lunch_date' => 'required',
+            'launch_date' => 'required',
             'brand_id'  => 'required',
         ]);
 

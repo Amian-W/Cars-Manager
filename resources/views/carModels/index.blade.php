@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <x-primary-button class="ml-4">
-            <a href="{{ route('brands.create') }}">
-            {{ __('Add new brand') }}
+            <a href="{{ route('carModels.create') }}">
+            {{ __('Add new Model') }}
         </a>
         </x-primary-button>
     </x-slot>
@@ -17,10 +17,13 @@
                             <th scope="col" class="px-6 py-3">
                                 Id </th>
                             <th scope="col" class="px-6 py-3">
-                                Brand name
+                                Model name
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Manufacturer
+                                Launch Date
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Brand
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 {{-- Actions --}}
@@ -28,30 +31,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- populate brand data --}}
-                        @foreach ($brands as $brand)
+
+                        {{-- populate model data --}}
+                        @foreach ($carModels as $carModel)
                             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                                 <th scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $brand->id }}
+                                    {{ $carModel->id }}
                                 </th>
                                 <td class="px-6 py-3">
-                                    {{ $brand->name }}
+                                    {{ $carModel->name }}
                                 </td>
                                 <td class="px-6 py-3">
-                                    {{ $brand->manufacturer }}
+                                    {{ $carModel->launch_date }}
+                                </td>
+                                <td class="px-6 py-3">
+                                    {{ $carModel->brand->name }}
                                 </td>
                                 <td class=" px-6 py-3 flex flex-row flex-wrap justify-between">
                                     <x-primary-button>
-                                        <a href="{{route('brands.show', $brand->id)}}"
+                                        <a href="{{route('carModels.show', $carModel->id)}}"
                                         >Details</a>
                                     </x-primary-button>
                                     <x-secondary-button>
-                                        <a href="{{route('brands.edit', $brand->id)}}"
+                                        <a href="{{route('carModels.edit', $carModel->id)}}"
                                         >Edit</a>
                                     </x-secondary-button>
                                     
-                                    <form method="post" action="{{ route('brands.destroy', $brand->id) }}">
+                                    <form method="post" action="{{ route('carModels.destroy', $carModel->id) }}">
                                         @csrf
                                         @method('delete')
                                         <x-danger-button >
@@ -64,7 +71,7 @@
                     </tbody>
                     <tfoot>
                         <tr class="font-semibold text-gray-900 {{-- dark:text-white --}}">
-                            <th scope="row" class="px-6 py-3 text-base">Total : {{ count($brands) }}</th>
+                            <th scope="row" class="px-6 py-3 text-base">Total : {{ count($carModels) }}</th>
                             <td class="px-6 py-3"></td>
                             <td class="px-6 py-3"></td>
                             <td class="px-6 py-3"></td>

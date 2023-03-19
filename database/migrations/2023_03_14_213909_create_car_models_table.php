@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('car_models', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('lunch_date');
+            $table->date('launch_date');
             $table->foreignId('brand_id')
                 ->constrained()
                 ->cascadeOnUpdate();

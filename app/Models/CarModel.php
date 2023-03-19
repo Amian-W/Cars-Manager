@@ -10,19 +10,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class CarModel extends Model
 {
     use HasFactory;
-    protected $fillables = [
+    protected $fillable = [
         'name',
-        'lunch_date',
+        'launch_date',
         'brand_id'
     ];
 
     //one model has many cars
-    public function sale(): HasMany{
+    public function car(): HasMany{
         return $this->hasMany(Car::class);
     }
 
     //one model belongs to one brand
-    public function client(): BelongsTo {
+    public function brand(): BelongsTo {
         return $this->belongsTo(Brand::class);
     }
 

@@ -15,7 +15,7 @@ class Brand extends Model
     ];
 
     //one brand has many models
-    public function sale(): HasMany{
+    public function carModel(): HasMany{
         return $this->hasMany(CarModel::class);
     }
 }
