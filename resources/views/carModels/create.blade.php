@@ -38,6 +38,7 @@
                     <option value="{{$brand->id}}">{{$brand->name}}</option>
                     @endforeach
                     </x-select>
+                    <x-input-error :messages="$errors->get('brand_id')" class="mt-2" />
                 </div>
 
                 <div>

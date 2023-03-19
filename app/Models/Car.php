@@ -16,7 +16,7 @@ class Car extends Model
     ];
 
     //one car belongs to one model
-    public function client(): BelongsTo {
+    public function carModel(): BelongsTo {
         return $this->belongsTo(CarModel::class);
     }
 }

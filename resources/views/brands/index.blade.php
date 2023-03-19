@@ -64,8 +64,8 @@
                     </tbody>
                     <tfoot>
                         <tr class="font-semibold text-gray-900 {{-- dark:text-white --}}">
-                            <th scope="row" class="px-6 py-3 text-base">Total : {{ count($brands) }}</th>
-                            <td class="px-6 py-3"></td>
+                            <th scope="row" class="px-6 py-3 text-base">Total : </th>
+                            <td class="px-6 py-3">{{ count($brands) }}</td>
                             <td class="px-6 py-3"></td>
                             <td class="px-6 py-3"></td>
                         </tr>

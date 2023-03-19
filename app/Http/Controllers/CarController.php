@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CarController extends Controller
 {
@@ -12,7 +13,8 @@ class CarController extends Controller
      */
     public function index()
     {
-        //
+        $cars = Car::all();
+        return view('cars.index', compact('cars'));
     }
 
     /**
@@ -20,7 +22,7 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        return view('cars.create');
     }
 
     /**
@@ -28,7 +30,15 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'registration_number' => 'required | min:8',
+            'kilometrage'  => 'required',
+            'car_model_id'  => 'required',
+        ]);
+
+        Car::create($request->all());
+        return redirect()->route('cars.index');
+
     }
 
     /**
@@ -36,15 +46,18 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        //
+        return view('cars.show', compact('car'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Car $car)
+    public function edit(Car $car) : Response
     {
-        //
+        return response()->view(
+            'cars.edit',
+            ['car' => Car::findOrFail($car->id)]
+        );
     }
 
     /**
@@ -52,7 +65,15 @@ class CarController extends Controller
      */
     public function update(Request $request, Car $car)
     {
-        //
+        $request->validate([
+            'registration_number' => 'required | min:8',
+            'kilometrage'  => 'required',
+            'car_model_id'  => 'required',
+        ]);
+
+        $car->update($request->all());
+        return redirect()->route('cars.index');
+
     }
 
     /**
@@ -60,6 +81,7 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
-        //
+        $car->delete();
+        return redirect()->route('cars.index');
     }
 }

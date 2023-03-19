@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <x-primary-button class="ml-4">
-            <a href="{{ route('carModels.create') }}">
-            {{ __('Add new Model') }}
+            <a href="{{ route('cars.create') }}">
+            {{ __('Add new car') }}
         </a>
         </x-primary-button>
     </x-slot>
@@ -17,13 +17,13 @@
                             <th scope="col" class="px-6 py-3">
                                 Id </th>
                             <th scope="col" class="px-6 py-3">
-                                Model name
+                                Registration Number
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Launch Date
+                                Kilometrage
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Brand
+                                Model	
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 {{-- Actions --}}
@@ -31,34 +31,33 @@
                         </tr>
                     </thead>
                     <tbody>
-
-                        {{-- populate model data --}}
-                        @foreach ($carModels as $carModel)
+                        {{-- populate brand data --}}
+                        @foreach ($cars as $car)
                             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                                 <th scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $carModel->id }}
+                                    {{ $car->id }}
                                 </th>
                                 <td class="px-6 py-3">
-                                    {{ $carModel->name }}
+                                    {{ $car->registration_number }}
                                 </td>
                                 <td class="px-6 py-3">
-                                    {{ $carModel->launch_date }}
+                                    {{ $car->kilometrage }}
                                 </td>
                                 <td class="px-6 py-3">
-                                    {{ $carModel->brand->name }}
+                                    {{ $car->carModel->name }}
                                 </td>
                                 <td class=" px-6 py-3 flex flex-row flex-wrap justify-between">
                                     <x-primary-button>
-                                        <a href="{{route('carModels.show', $carModel->id)}}"
+                                        <a href="{{route('cars.show', $car->id)}}"
                                         >Details</a>
                                     </x-primary-button>
                                     <x-secondary-button>
-                                        <a href="{{route('carModels.edit', $carModel->id)}}"
+                                        <a href="{{route('cars.edit', $car->id)}}"
                                         >Edit</a>
                                     </x-secondary-button>
                                     
-                                    <form method="post" action="{{ route('carModels.destroy', $carModel->id) }}">
+                                    <form method="post" action="{{ route('cars.destroy', $car->id) }}">
                                         @csrf
                                         @method('delete')
                                         <x-danger-button >
@@ -71,8 +70,8 @@
                     </tbody>
                     <tfoot>
                         <tr class="font-semibold text-gray-900 {{-- dark:text-white --}}">
-                            <th scope="row" class="px-6 py-3 text-base">Total : </th>
-                            <td class="px-6 py-3">{{ count($carModels) }}</td>
+                            <th scope="row" class="px-6 py-3 text-base">Total :</th>
+                            <td class="px-6 py-3"> {{ count($cars) }}</td>
                             <td class="px-6 py-3"></td>
                             <td class="px-6 py-3"></td>
                         </tr>
