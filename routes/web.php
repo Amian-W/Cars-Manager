@@ -27,7 +27,7 @@ Route::get('/dashboard', function () {
 
 Route::resource('brands',BrandController::class)->middleware('auth');
 Route::resource('carModels',CarModelController::class)->middleware('auth');
-Route::resource('cars',CarController::class)->middleware('auth');
+Route::resource('cars',CarController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
