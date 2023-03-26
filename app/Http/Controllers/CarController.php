@@ -8,6 +8,12 @@ use Illuminate\Http\Response;
 
 class CarController extends Controller
 {
+
+    public function __construcor()
+    {
+        $this->middleware('auth')->except('index');
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      */
