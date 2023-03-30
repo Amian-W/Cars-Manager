@@ -25,14 +25,24 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('brands',BrandController::class)->middleware('auth');
-Route::resource('carModels',CarModelController::class)->middleware('auth');
-Route::resource('cars',CarController::class);
+
+Route::resource('brands',BrandController::class, ['only' => ['index', 'show']]);
+Route::resource('carModels',CarModelController::class, ['only' => ['index', 'show']]);
+Route::resource('cars',CarController::class, ['only' => ['index', 'show']]);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource('brands', BrandController::class, ['only' => ['index', 'show']]);
+    Route::resource('carModels', CarModelController::class, ['only' => ['index', 'show']]);
+    Route::resource('cars', CarController::class, ['only' => ['index', 'show']]);
 });
 
-require __DIR__.'/auth.php';
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('brands', BrandController::class, ['except' => ['index', 'show']]);
+    Route::resource('carModels', CarModelController::class, ['except' => ['index', 'show']]);
+    Route::resource('cars', CarController::class, ['except' => ['index', 'show']]);
+});
+
+require __DIR__ . '/auth.php';
